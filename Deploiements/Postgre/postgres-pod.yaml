@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  containers:
+  - name: postgres
+    image: postgres:15  # Utilise une version appropriée de PostgreSQL
+    ports:
+    - containerPort: 5432
+    env:
+    - name: POSTGRES_USER
+      value: "edson"
+    - name: POSTGRES_PASSWORD
+      value: "edson"
+    - name: POSTGRES_DB
+      value: "mydatabase"
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data
+      name: postgres-storage
+  volumes:
+  - name: postgres-storage
+    emptyDir: {}
